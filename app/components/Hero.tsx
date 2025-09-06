@@ -57,7 +57,6 @@ export default function Hero() {
           className="text-5xl md:text-7xl font-bold mb-4"
         >
           {typedText}
-          {/* <span className="animate-pulse">|</span> */}
         </motion.h1>
 
         <motion.p
@@ -112,13 +111,6 @@ export default function Hero() {
             <i className={`fal fa-arrow-down mr-2 rtl:mr-0 rtl:ml-2`}></i>
             {t('exploreJourney')}
           </a>
-          {/* <a
-            href="#contact"
-            className="inline-block border-2 border-white hover:bg-white hover:text-gray-800 text-white px-8 py-3 rounded-full transition-all duration-300 transform hover:scale-105 hover:shadow-lg"
-          >
-            <i className={`fal fa-download mr-2 rtl:mr-0 rtl:ml-2`}></i>
-            {t('downloadCV')}
-          </a> */}
         </motion.div>
       </div>
     </section>

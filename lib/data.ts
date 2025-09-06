@@ -1,4 +1,3 @@
-import { image, picture } from 'framer-motion/client';
 import { Locale } from './translations';
 
 export const travelerData = {

@@ -15,7 +15,6 @@ export default function TravelMap() {
 
   useEffect(() => {
     if (isInView && mapRef.current && !map) {
-      // Dynamic import for Leaflet (client-side only)
       import('leaflet').then((L) => {
         const mapInstance = L.map(mapRef.current!).setView([25, 10], 2)
 
@@ -24,14 +23,12 @@ export default function TravelMap() {
           maxZoom: 19
         }).addTo(mapInstance)
 
-        // Custom icon
         const customIcon = L.divIcon({
           html: '<i class="fas fa-map-marker-alt text-red-500 text-2xl"></i>',
           iconSize: [30, 30],
           className: 'custom-div-icon'
         })
 
-        // Add markers
         const markers: any[] = []
         travels.forEach((location, index) => {
           setTimeout(() => {
@@ -54,7 +51,6 @@ export default function TravelMap() {
           }, index * 100)
         })
 
-        // Draw connecting lines
         setTimeout(() => {
           const latlngs = travels.map(loc => [loc.lat, loc.lng] as [number, number])
           L.polyline(latlngs, {
@@ -64,7 +60,6 @@ export default function TravelMap() {
             dashArray: '5, 10'
           }).addTo(mapInstance)
 
-          // Fit map to show all markers
           if (markers.length > 0) {
             const group = L.featureGroup(markers)
             mapInstance.fitBounds(group.getBounds().pad(0.1))
@@ -93,7 +88,6 @@ export default function TravelMap() {
           {t('travelMap')}
         </motion.h2>
 
-        {/* Map Statistics */}
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8 max-w-4xl mx-auto">
           {stats.map((stat, index) => (
             <motion.div

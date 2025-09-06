@@ -2,7 +2,6 @@ import Header from './components/Header'
 import Hero from './components/Hero'
 import About from './components/About'
 import TravelMap from './components/TravelMap'
-import Travels from './components/Travels'
 import Gallery from './components/Gallery'
 import Contact from './components/Contact'
 import Footer from './components/Footer'
@@ -17,7 +16,6 @@ export default function Home() {
         <Hero />
         <About />
         <TravelMap />
-        {/* <Travels /> */}
         <Gallery />
         <Contact />
         <Footer />

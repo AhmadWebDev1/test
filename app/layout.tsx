@@ -21,7 +21,7 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html className={cairo.variable}  suppressHydrationWarning={true}>
+    <html lang="ar" dir="rtl" className={cairo.variable} suppressHydrationWarning={true}>
       <head>
         <link
           rel="stylesheet"

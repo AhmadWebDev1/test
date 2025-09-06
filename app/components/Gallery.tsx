@@ -2,15 +2,28 @@
 
 import { motion } from 'framer-motion'
 import { useInView } from 'framer-motion'
-import { useRef } from 'react'
-import { useInstagram } from '@/lib/hooks/useInstagram'
+import { useRef, useEffect, useState } from 'react'
+import { getInstagramData } from '@/lib/instagram';
 import { useLanguage } from '@/lib/languageContext'
+import { travelerData } from '@/lib/data';
 
 export default function Gallery() {
   const ref = useRef(null)
   const isInView = useInView(ref, { once: true })
-  const { data, loading, error } = useInstagram()
+  const [instagramData, setInstagramData] = useState<any>()
   const { t, isRTL } = useLanguage()
+
+  useEffect(() => {
+    const fetchInstagramData = async () => {
+      try {
+        const data = await getInstagramData();        
+        setInstagramData(data);
+      } catch (error) {
+        console.error('Error fetching Instagram data:', error);
+      }
+    };
+    fetchInstagramData();
+  }, []);
 
   return (
     <section
@@ -25,30 +38,36 @@ export default function Gallery() {
           transition={{ duration: 0.6 }}
           className="text-4xl font-bold text-center mb-12 text-gray-800 dark:text-white"
         >
-          <i className="fal fa-camera text-blue-600 dark:text-blue-400 mr-2 rtl:mr-0 rtl:ml-2"></i> {t('galleryTitle')}
+          <i className="fal fa-camera text-blue-600 dark:text-blue-400 mr-2 rtl:mr-0 rtl:ml-2"></i>{" "}
+          {t("galleryTitle")}
         </motion.h2>
 
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-            {data && data.posts && data.posts.slice(0, 12).map((post: any, index: number) => (
-            <motion.a
-              key={post.id}
-              href={post.permalink}
-              initial={{ opacity: 0, scale: 0.8 }}
-              animate={isInView ? { opacity: 1, scale: 1 } : {}}
-              transition={{ duration: 0.5, delay: index * 0.05 }}
-              className="group"
-            >
-              <div className="aspect-square overflow-hidden rounded-lg shadow-lg relative cursor-pointer">
-                <img
-                  src={post.url}
-                  className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
-                />
-                <div className="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-30 transition-all duration-300 flex items-center justify-center">
-                  <i className="fas fa-search-plus text-white text-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"></i>
+          {instagramData &&
+            instagramData.posts &&
+            instagramData.posts.slice(0, 12).map((post: any, index: number) => (
+              <motion.a
+                key={post.id || `gallery-item-${index}`}
+                href={post.permalink}
+                target="_blank"
+                rel="noopener noreferrer"
+                initial={{ opacity: 0, scale: 0.8 }}
+                animate={isInView ? { opacity: 1, scale: 1 } : {}}
+                transition={{ duration: 0.5, delay: index * 0.05 }}
+                className="group"
+              >
+                <div className="aspect-square overflow-hidden rounded-lg shadow-lg relative cursor-pointer">
+                  <img
+                    src={post.url}
+                    alt={post.caption || "Instagram post"}
+                    className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                  />
+                  <div className="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-30 transition-all duration-300 flex items-center justify-center">
+                    <i className="fas fa-search-plus text-white text-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"></i>
+                  </div>
                 </div>
-              </div>
-            </motion.a>
-          ))}
+              </motion.a>
+            ))}
         </div>
 
         <motion.div
@@ -58,16 +77,16 @@ export default function Gallery() {
           className="text-center mt-8"
         >
           <a
-            href={`https://instagram.com/${data?.profile?.username || 'ahmad.al.khatib565'}`}
+            href={instagramData && instagramData.profile ? `https://instagram.com/${instagramData.profile.username}` : travelerData.social.instagram}
             target="_blank"
             rel="noopener noreferrer"
             className="inline-block bg-blue-600 hover:bg-blue-700 dark:bg-blue-500 dark:hover:bg-blue-600 text-white px-8 py-3 rounded-full transition-all duration-300 transform hover:scale-105 hover:shadow-lg"
           >
             <i className="fas fa-external-link-alt mr-2 rtl:mr-0 rtl:ml-2"></i>
-            {t('viewMore')}
+            {t("viewMore")}
           </a>
         </motion.div>
       </div>
     </section>
-  )
+  );
 }

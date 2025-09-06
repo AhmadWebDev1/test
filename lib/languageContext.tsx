@@ -22,12 +22,10 @@ export const LanguageProvider: React.FC<LanguageProviderProps> = ({ children }) 
 
   useEffect(() => {
     setMounted(true);
-    // Load saved locale from localStorage
     const savedLocale = localStorage.getItem('locale') as Locale;
     if (savedLocale && ['ar', 'en', 'de'].includes(savedLocale)) {
       setLocale(savedLocale);
     } else {
-      // Detect browser language
       const browserLang = navigator.language.split('-')[0];
       if (browserLang === 'ar') {
         setLocale('ar');
@@ -42,7 +40,6 @@ export const LanguageProvider: React.FC<LanguageProviderProps> = ({ children }) 
   useEffect(() => {
     if (mounted) {
       localStorage.setItem('locale', locale);
-      // Update document attributes
       document.documentElement.lang = locale;
       document.documentElement.dir = locale === 'ar' ? 'rtl' : 'ltr';
     }

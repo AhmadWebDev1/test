@@ -3,9 +3,9 @@ export type Locale = 'ar' | 'en' | 'de';
 export const translations = {
   ar: {
     // Navigation
+    home1: 'رحلاتي',
     home: 'الرئيسية',
     about: 'عني',
-    travels: 'رحلاتي',
     gallery: 'المعرض',
     contact: 'اتصل بي',
     
@@ -26,15 +26,8 @@ export const translations = {
     statContinents: 'قارات',
     statKilometers: 'كيلومتر',
     
-    // Travels Section
-    travelsTitle: 'رحلاتي المميزة',
-    travelsDescription: 'اكتشف معي أجمل الوجهات التي زرتها حول العالم',
-    duration: 'المدة',
-    readMore: 'اقرأ المزيد',
-    
     // Gallery Section
     galleryTitle: 'معرض صوري',
-    galleryDescription: 'انقر على أي صورة لعرضها بحجم أكبر وتصفح المعرض',
     viewMore: 'المزيد من الصور',
     
     // Travel Map
@@ -44,11 +37,6 @@ export const translations = {
     currentCity: 'المدينة الحالية',
     nextDestination: 'الوجهة القادمة',
     
-    // Instagram Section
-    instagramTitle: 'آخر منشوراتي على إنستغرام',
-    instagramDescription: 'تابع آخر مغامراتي ولحظاتي المميزة',
-    viewOnInstagram: 'عرض على إنستغرام',
-    
     // Contact Section
     contactTitle: 'تواصل معي',
     contactDescription: 'هل تريد السفر معي أو تحتاج نصائح سفر؟ لا تتردد في التواصل!',
@@ -56,8 +44,6 @@ export const translations = {
     contactEmail: 'البريد الإلكتروني',
     contactMessage: 'الرسالة',
     contactSend: 'إرسال الرسالة',
-    contactPhone: 'الهاتف',
-    contactAddress: 'العنوان',
     
     // Footer
     footerDescription: 'استكشف العالم معي واكتشف جماله الخفي',
@@ -90,26 +76,13 @@ export const translations = {
     
     // Days
     days: 'أيام',
-    
-    // Fancybox translations
-    close: 'إغلاق',
-    next: 'التالي',
-    prev: 'السابق',
-    error: 'حدث خطأ في تحميل الصورة',
-    playStart: 'بدء العرض',
-    playStop: 'إيقاف العرض',
-    fullScreen: 'ملء الشاشة',
-    thumbs: 'صور مصغرة',
-    download: 'تحميل',
-    share: 'مشاركة',
-    zoom: 'تكبير',
   },
   
   en: {
+    home1: 'My Travels',
     // Navigation
     home: 'Home',
     about: 'About',
-    travels: 'Travels',
     gallery: 'Gallery',
     contact: 'Contact',
     
@@ -130,15 +103,8 @@ export const translations = {
     statContinents: 'Continents',
     statKilometers: 'Kilometers',
     
-    // Travels Section
-    travelsTitle: 'Featured Travels',
-    travelsDescription: 'Discover with me the most beautiful destinations I\'ve visited around the world',
-    duration: 'Duration',
-    readMore: 'Read More',
-    
     // Gallery Section
     galleryTitle: 'Photo Gallery',
-    galleryDescription: 'Click on any image to view it larger and browse the gallery',
     viewMore: 'View More Photos',
     
     // Travel Map
@@ -148,11 +114,6 @@ export const translations = {
     currentCity: 'Current City',
     nextDestination: 'Next Destination',
     
-    // Instagram Section
-    instagramTitle: 'My Latest Instagram Posts',
-    instagramDescription: 'Follow my latest adventures and special moments',
-    viewOnInstagram: 'View on Instagram',
-    
     // Contact Section
     contactTitle: 'Contact Me',
     contactDescription: 'Want to travel with me or need travel advice? Don\'t hesitate to get in touch!',
@@ -160,8 +121,6 @@ export const translations = {
     contactEmail: 'Email',
     contactMessage: 'Message',
     contactSend: 'Send Message',
-    contactPhone: 'Phone',
-    contactAddress: 'Address',
     
     // Footer
     footerDescription: 'Explore the world with me and discover its hidden beauty',
@@ -194,26 +153,13 @@ export const translations = {
     
     // Days
     days: 'days',
-    
-    // Fancybox translations
-    close: 'Close',
-    next: 'Next',
-    prev: 'Previous',
-    error: 'Failed to load image',
-    playStart: 'Start slideshow',
-    playStop: 'Stop slideshow',
-    fullScreen: 'Full screen',
-    thumbs: 'Thumbnails',
-    download: 'Download',
-    share: 'Share',
-    zoom: 'Zoom',
   },
   
   de: {
+        home1: 'My Travels',
     // Navigation
     home: 'Startseite',
     about: 'Über mich',
-    travels: 'Reisen',
     gallery: 'Galerie',
     contact: 'Kontakt',
     
@@ -234,15 +180,8 @@ export const translations = {
     statContinents: 'Kontinente',
     statKilometers: 'Kilometer',
     
-    // Travels Section
-    travelsTitle: 'Besondere Reisen',
-    travelsDescription: 'Entdecke mit mir die schönsten Reiseziele, die ich auf der ganzen Welt besucht habe',
-    duration: 'Dauer',
-    readMore: 'Mehr lesen',
-    
     // Gallery Section
     galleryTitle: 'Fotogalerie',
-    galleryDescription: 'Klicke auf ein Bild, um es größer anzuzeigen und durch die Galerie zu blättern',
     viewMore: 'Mehr Fotos ansehen',
     
     // Travel Map
@@ -252,11 +191,6 @@ export const translations = {
     currentCity: 'Aktuelle Stadt',
     nextDestination: 'Nächstes Ziel',
     
-    // Instagram Section
-    instagramTitle: 'Meine neuesten Instagram-Posts',
-    instagramDescription: 'Folge meinen neuesten Abenteuern und besonderen Momenten',
-    viewOnInstagram: 'Auf Instagram ansehen',
-    
     // Contact Section
     contactTitle: 'Kontaktiere mich',
     contactDescription: 'Möchtest du mit mir reisen oder brauchst Reiseratschläge? Zögere nicht, dich zu melden!',
@@ -264,8 +198,6 @@ export const translations = {
     contactEmail: 'E-Mail',
     contactMessage: 'Nachricht',
     contactSend: 'Nachricht senden',
-    contactPhone: 'Telefon',
-    contactAddress: 'Adresse',
     
     // Footer
     footerDescription: 'Erkunde die Welt mit mir und entdecke ihre verborgene Schönheit',
@@ -298,19 +230,6 @@ export const translations = {
     
     // Days
     days: 'Tage',
-    
-    // Fancybox translations
-    close: 'Schließen',
-    next: 'Weiter',
-    prev: 'Zurück',
-    error: 'Fehler beim Laden des Bildes',
-    playStart: 'Diashow starten',
-    playStop: 'Diashow stoppen',
-    fullScreen: 'Vollbild',
-    thumbs: 'Miniaturansichten',
-    download: 'Herunterladen',
-    share: 'Teilen',
-    zoom: 'Zoomen',
   }
 };
 

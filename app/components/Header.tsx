@@ -27,8 +27,7 @@ export default function Header() {
       setIsScrolled(scrollTop > 50)
       setScrollProgress(scrollPercent)
       
-      // تحديد القسم النشط
-      const sections = ['home', 'about', 'travels', 'map-section', 'gallery', 'contact']
+      const sections = ['home', 'about', 'map-section', 'gallery', 'contact']
       const scrollPosition = scrollTop + 100
       
       for (const section of sections) {
@@ -50,7 +49,6 @@ export default function Header() {
   const navLinks = [
     { href: '#home', id: 'home', label: t('home'), icon: 'home' },
     { href: '#about', id: 'about', label: t('about'), icon: 'user' },
-    { href: '#travels', id: 'travels', label: t('travels'), icon: 'map-marked-alt' },
     { href: '#map-section', id: 'map-section', label: t('travelMap'), icon: 'globe' },
     { href: '#gallery', id: 'gallery', label: t('gallery'), icon: 'camera' },
     { href: '#contact', id: 'contact', label: t('contact'), icon: 'envelope' },
@@ -94,7 +92,7 @@ export default function Header() {
                 <i className="fal fa-compass text-lg"></i>
               </div>
               <span className="text-xl font-bold text-gray-900 dark:text-white">
-                {isRTL ? 'رحلاتي' : 'My Travels'}
+                {t('home1')}
               </span>
             </Link>
 
