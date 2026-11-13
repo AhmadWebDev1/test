@@ -1,0 +1,4 @@
+interface:
+  display_name: "Apex UI/UX"
+  short_description: "Master-level UI/UX craftsmanship, anti-slop design, and GPU motion engineering"
+  default_prompt: "Use $apex-ui-ux to craft, polish, or unslop this interface with 60:30:10 hierarchy, 4px grid, and native transitions."
