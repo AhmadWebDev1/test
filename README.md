@@ -1,6 +1,6 @@
 # fix-with-ai
 
-A modular, open-source collection of **evidence-based diagnostic prompts**, **AI agent protocols**, **curated skills**, and **automated workflows** — built to troubleshoot real-world tech problems and streamline software engineering safely.
+A modular, open-source collection of **evidence-based diagnostic prompts**, **lean AI agent protocols**, **curated skills**, and **on-demand engineering workflows** — built to troubleshoot real-world tech problems and streamline software engineering safely.
 
 > Designed to work seamlessly with **Antigravity**, **Claude Code**, **OpenCode**, **Cursor**, and any agent that reads Markdown instructions.
 
@@ -8,11 +8,11 @@ A modular, open-source collection of **evidence-based diagnostic prompts**, **AI
 
 ```text
 fix-with-ai/
-├── agents/          # Core behavioral & engineering protocols (AGENTS.md)
+├── agents/          # Lean always-loaded agent protocol (AGENTS.md)
 ├── prompts/         # Safe, evidence-based diagnostic & maintenance prompts
 ├── skills/          # Modular agent skills, references, and audit scripts
 │   └── apex-ui-ux/  # UI/UX design & frontend engineering skill
-└── workflows/       # Multi-step automated workflows & pipelines
+└── workflows/       # On-demand engineering playbooks (debugging, review, security)
 ```
 
 ## Diagnostic & Maintenance Prompts (`prompts/`)
@@ -27,22 +27,28 @@ Every prompt follows a strict **read-only diagnosis first -> evidence-based plan
 | **Safe Windows Debloat** | Remove bloatware and UI ads using transparent PowerShell with backups | [windows-debloat-safe.md](prompts/windows-debloat-safe.md) |
 | **Email Cleanup Organizer** | Triage, label, and organize an overloaded inbox systematically | [email-cleanup-organizer.md](prompts/email-cleanup-organizer.md) |
 
+## On-Demand Workflows (`workflows/`)
+
+Loaded only when needed to keep context windows lean and token costs low.
+
+| Workflow | What It Covers | Direct Link |
+| :--- | :--- | :--- |
+| **Debugging Loop** | 6-phase red-before-green loop for hard bugs, flakes, and performance regressions | [debugging-loop.md](workflows/debugging-loop.md) |
+| **Code Review & PRs** | Two-axis diff review (Spec vs. Standards), audit formats, PR & commit templates | [code-review.md](workflows/code-review.md) |
+| **Security Audit** | Evidence-backed SAST/DAST checkup for injections, IDOR, SSRF, secrets, and LLM risks | [security-audit.md](workflows/security-audit.md) |
+
 ## Agent Protocols (`agents/`)
 
-- **[AGENTS.md](agents/AGENTS.md):** A lean senior engineering protocol combining practical rules for autonomous, low-noise, high-rigor coding and security awareness.
+- **[AGENTS.md](agents/AGENTS.md):** A lean (~72 lines) senior engineering protocol focused on tool discovery, autonomy, simplicity, surgical diffs, vertical-slice TDD, and safety guardrails — pointing to `workflows/` for heavy tasks.
 
 ## Modular Skills (`skills/`)
 
 - **[apex-ui-ux](skills/apex-ui-ux/SKILL.md):** UI/UX design and frontend engineering skill with design tokens, motion guidelines, view-transition recipes, and automated UI audit/snapshot scripts (`audit-ui.mjs`, `snapshot.mjs`).
 
-## Workflows (`workflows/`)
-
-- **[workflows/](workflows/):** Staging area for multi-step agent pipelines and repeatable automation routines (coming soon).
-
 ## Quick Start
 
 1. **Run a diagnostic prompt:** Open any file in [prompts/](prompts/), click **Raw**, copy the content, and paste it into your AI agent or terminal assistant.
-2. **Adopt the agent protocol:** Copy [agents/AGENTS.md](agents/AGENTS.md) into the root of your project as `AGENTS.md`.
+2. **Adopt the lean agent protocol:** Copy [agents/AGENTS.md](agents/AGENTS.md) into the root of your project as `AGENTS.md` (and copy [workflows/](workflows/) alongside it for on-demand playbooks).
 3. **Install a skill:** Copy any folder from [skills/](skills/) into your agent's skills directory (e.g. `.agents/skills/`).
 
 ## Follow & Contribute
@@ -52,4 +58,4 @@ Every prompt follows a strict **read-only diagnosis first -> evidence-based plan
 
 ## License
 
-MIT — see the `LICENSE` file for details.
+MIT — see the [LICENSE](LICENSE) file for details.
