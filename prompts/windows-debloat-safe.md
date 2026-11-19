@@ -1,41 +1,45 @@
-I want to safely clean up pre-installed bloatware, background ads/telemetry, and unnecessary startup clutter on my Windows 10/11 PC. Act as a senior Windows systems engineer and guide me step by step using transparent, native commands and strictly reversible changes.
+Act as a senior Windows systems engineer. Safely audit and clean pre-installed bloatware, ads/telemetry, and startup clutter on this Windows 10/11 PC using transparent, native PowerShell and `winget` commands with strictly reversible changes.
 
-Execution & Safety Rules:
-- Default to a read-only audit first. Complete the full inventory and safety classification before modifying any app, service, scheduled task, or registry key, and wait for my approval between phases.
-- Never run black-box remote scripts (such as `irm ... | iex` or third-party debloaters). Use only transparent, native PowerShell or `winget` commands that I can read and reverse.
-- Keep output concise: present clean summaries and numbered lists, and never flood the chat with raw `Get-AppxPackage` or registry dumps.
-- Privilege boundary: Do NOT escalate to Administrator privileges during the read-only audit unless required, and always ask for my explicit approval before running elevated commands.
-- Mandatory backup before changes: Before applying the first approved change, create a Windows System Restore Point (and verify it actually succeeded, noting Windows' 24-hour restore-point cooldown if applicable) and export all affected registry keys to a timestamped `.reg` backup file.
-- Apply one reversible category at a time (e.g., UI ads first, then unused apps), verify stability, and wait for my confirmation.
-- Never-touch zones: Do NOT disable or remove Windows Defender / Microsoft Security, Windows Update core services, Microsoft Store runtime / `.NET` / VC++ redistributables, BitLocker, network/firewall services, or hardware/OEM drivers.
+Execution & Agent Guardrails:
+- Read-only first: Run ONLY read-only inspection commands in Phase 1. Do NOT modify any app, service, scheduled task, or registry key until I explicitly approve numbered items.
+- Hard Stops: STOP and wait for my explicit reply after Phase 1, after Phase 2, and after each approved category in Phase 4. Never auto-proceed to the next phase.
+- Privilege boundary: First check whether the current shell is elevated. Do NOT silently trigger UAC or `Start-Process -Verb RunAs`. Ask my explicit approval before running any command that requires Administrator privileges.
+- No black-box scripts: Never run remote or third-party debloat scripts (e.g., `irm ... | iex`). Use only readable, native PowerShell or `winget` commands.
+- Keep context clean: Filter command outputs inside PowerShell (e.g., `Select-Object`, `Where-Object`) and present concise summaries/tables only—never dump raw `Get-AppxPackage`, `winget`, or registry outputs into chat.
+- Mandatory backup before any change: Before applying the first approved change, create and verify a Windows System Restore Point (note Windows' 24-hour cooldown if triggered; do not silently bypass it without asking) and export all affected registry keys to a timestamped `.reg` backup folder at `$env:USERPROFILE\Documents\WinDebloatBackup_YYYYMMDD_HHMM`, showing the exact path.
+- Never-touch zones: NEVER disable or remove Windows Defender/Security, Windows Update core services, Store/`.NET`/VC++ runtimes, BitLocker, network/firewall services, or OEM/hardware drivers.
 
-1. System & Bloatware Inventory (Read-Only):
-- OS Edition & Restore Readiness: Check Windows edition/build and whether System Protection (System Restore) is enabled on `C:`.
-- Pre-Installed AppX & Win32 OEM Apps: Inspect non-system `Get-AppxPackage` entries and installed Win32 programs (`winget list` / registry uninstall keys) to spot trialware, OEM promos, or unused bundled apps.
-- UI Ads, Suggestions & Background Clutter: Read current registry/policy values for:
-  * Start Menu & Settings suggested content / ads (`ContentDeliveryManager`) and Bing web search in Start Menu
-  * Lock screen tips & Windows Spotlight promos
-  * Background apps, Edge Startup Boost, Widgets, News feeds, and Copilot/AI sidebar toggles (if present)
-- Startup & Scheduled Bloat: List user startup items and third-party/OEM scheduled updater tasks running at logon.
-- Present the findings cleanly without changing anything yet, and ask which features I actually use (e.g., OneDrive, Xbox/Gaming, Microsoft Store, Edge, Widgets) before classifying items.
+Phase 1 — Bloatware & Clutter Inventory (Read-Only):
+1. Check Windows edition/build, whether the current shell is Admin, and whether System Protection (System Restore) is enabled on `C:`.
+2. Inspect non-system AppX packages (`Get-AppxPackage`) and Win32 OEM/trialware programs (`winget list` / uninstall registry keys).
+3. Read current UI ad/clutter registry/policy values:
+   - Start Menu & Settings suggestions (`ContentDeliveryManager`) and Bing web search in Start
+   - Lock screen tips & Windows Spotlight promos
+   - Background apps, Edge Startup Boost, Widgets, News feeds, and Copilot sidebar (if present)
+4. List user startup items and third-party/OEM scheduled updater tasks running at logon.
+5. Present a clean summary, ask which features I actively use (OneDrive, Xbox/Gaming, Microsoft Store, Edge, Widgets), and STOP.
 
-2. Three-Tier Safety Classification:
-- Group every candidate item into three strict tiers:
-  * Tier 1 (Safe & Reversible): Zero OS impact; easily re-enabled or reinstalled (Start Menu ads/suggestions, Lock screen tips, unused bundled apps like News, Solitaire, Clipchamp, or promo apps).
-  * Tier 2 (Review First): Safe only if I do not rely on the feature (OneDrive auto-start/sync, Xbox Game Bar/apps, Widgets, Edge background boost, OEM helper utilities, Bing Start Menu search).
-  * Tier 3 (Do Not Touch): Core OS stability, security, or app runtime dependencies (Windows Defender, Windows Update, `.NET` / VC++ runtimes, Store framework, audio/GPU/network drivers).
-- List each candidate with: Number, Item Name, Current State, Tier, Impact, and Exact Rollback Method.
+Phase 2 — Three-Tier Classification:
+Group every candidate into 3 strict tiers:
+- Tier 1 (Safe & Reversible): Zero OS impact (Start/Lock screen ads, unused bundled apps like News, Solitaire, Clipchamp, promo apps).
+- Tier 2 (Review First): Safe only if unused (OneDrive auto-start, Xbox Game Bar/apps, Widgets, Edge Startup Boost, OEM utilities, Bing Start search).
+- Tier 3 (Do Not Touch): Defender, Windows Update, `.NET`/VC++ runtimes, Store framework, hardware drivers.
 
-3. Pre-Change Backup & Approval Gate:
-- Ask me to approve specific numbered items from Tier 1 and Tier 2 (never Tier 3).
-- Before executing any approved item:
-  * Create and verify a System Restore Point (if System Protection is turned off, notify me and offer to enable it first).
-  * Export affected registry paths to a timestamped `.reg` backup file in a dedicated backup folder on Desktop or Documents, and show me the exact path.
+Present a numbered table with: `# | Item Name | Current State | Tier | Impact | Exact Rollback Method`. Ask me to reply with the exact numbers I approve from Tiers 1–2 (never Tier 3), and STOP.
 
-4. Authorized Debloat & Before/After Verification:
-- Execute only the approved changes one group at a time using transparent native commands (`Remove-AppxPackage` for the current user without stripping provisioned OS core unless requested, `winget uninstall` for approved Win32 trialware, and `Set-ItemProperty` for UI/ad toggles).
-- Present a Before vs. After summary:
-  * Number of background/startup items disabled
-  * AppX and Win32 bloat packages removed
-  * Change in RAM usage and background process count
-  * Exact location of the `.reg` backup file and one-line commands to restore any removed app or setting if needed.
+Phase 3 — Backup Gate:
+Once I approve specific items:
+1. Create and verify a System Restore Point (if System Protection is off on `C:`, ask to enable it first).
+2. Export every registry path that will be modified to `$env:USERPROFILE\Documents\WinDebloatBackup_YYYYMMDD_HHMM` and confirm the files exist.
+
+Phase 4 — Authorized Execution & Verification:
+1. Apply approved changes one category at a time (e.g., UI ads first, then unused apps) using:
+   - `Remove-AppxPackage` (current user only; do NOT strip provisioned packages unless I explicitly ask)
+   - `winget uninstall` (approved Win32 trialware)
+   - `Set-ItemProperty` (UI/ad toggles)
+2. Verify stability after each category and STOP for my confirmation before the next group.
+3. At the end, report a Before vs. After summary:
+   - Startup/background items disabled
+   - AppX & Win32 packages removed
+   - Change in RAM usage and background process count
+   - Exact `.reg` backup folder path + one-line commands to restore any removed app or setting.
